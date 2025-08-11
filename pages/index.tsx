@@ -1,7 +1,5 @@
-import type { NextPage, GetServerSideProps } from 'next'
-import Head from 'next/head'
-import MovieList from '../components/MovieList'
-import { getNowPlaying } from '../lib/tmdb'
+import type { GetServerSideProps, NextPage } from 'next'
+import MovieCard from '../components/MovieCard'
 
 interface Movie {
   id: number
@@ -15,21 +13,28 @@ interface HomeProps {
 
 const Home: NextPage<HomeProps> = ({ movies }) => {
   return (
-    <>
-      <Head>
-        <title>Tanya Movies - Películas Recientes</title>
-      </Head>
-      <main>
-        <h1>Películas Recientes</h1>
-        <MovieList movies={movies} />
-      </main>
-    </>
+    <main>
+      <h1>Tanya Movies</h1>
+      <div style={{ display: 'flex', flexWrap: 'wrap', gap: '20px' }}>
+        {movies.map((movie) => (
+          <MovieCard key={movie.id} movie={movie} />
+        ))}
+      </div>
+    </main>
   )
 }
 
 export const getServerSideProps: GetServerSideProps = async () => {
-  const movies = await getNowPlaying()
-  return { props: { movies } }
+  const res = await fetch(
+    `https://api.themoviedb.org/3/movie/now_playing?api_key=${process.env.TMDB_API_KEY}&language=es-MX&page=1`
+  )
+  const data = await res.json()
+
+  return {
+    props: {
+      movies: data.results,
+    },
+  }
 }
 
 export default Home
