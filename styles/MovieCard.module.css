@@ -1,20 +1,21 @@
 .card {
-  background: #222;
-  padding: 10px;
-  border-radius: 8px;
-  cursor: pointer;
-  transition: transform 0.2s ease;
-  text-align: center;
+  display: block;
+  border-radius: 6px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  text-decoration: none;
+  color: inherit;
 }
-.card:hover {
-  transform: scale(1.05);
-  background: #333;
-}
+
 .card img {
   width: 100%;
-  border-radius: 6px;
+  height: auto;
+  display: block;
+  border-bottom: 1px solid #eee;
 }
-h3 {
+
+.title {
   margin: 10px 0 0;
   font-size: 1rem;
+  padding: 0 10px 10px;
 }

@@ -20,7 +20,7 @@ export default function MovieCard({ movie }: MovieCardProps) {
     <Link href={`/movie/${movie.id}`}>
       <a className={styles.card}>
         <img src={poster} alt={movie.title} />
-        <h3>{movie.title}</h3>
+        <h3 className={styles.title}>{movie.title}</h3>
       </a>
     </Link>
   )
